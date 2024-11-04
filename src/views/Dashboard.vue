@@ -1,8 +1,8 @@
 <script setup>
 import { useLayout } from '@/layout/composables/layout';
+import { NodeService } from '@/service/NodeService';
 import { ProductService } from '@/service/ProductService';
 import { onMounted, ref, watch } from 'vue';
-import { NodeService } from '@/service/NodeService';
 
 const { getPrimary, getSurface, isDarkTheme } = useLayout();
 
@@ -22,6 +22,23 @@ onMounted(() => {
 //     { label: 'Add New', icon: 'pi pi-fw pi-plus' },
 //     { label: 'Remove', icon: 'pi pi-fw pi-trash' }
 // ]);
+
+//разделы!!!
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const sections = ref([
+    { id: 1, name: 'Раздел №1', link: '/section/1' },
+    { id: 2, name: 'Раздел №2', link: '/section/2' },
+    { id: 3, name: 'Раздел №3', link: '/section/3' },
+    { id: 4, name: 'Раздел №4', link: '/section/4' }
+]);
+
+function goToSection(link) {
+    router.push(link);
+}
+////
 
 onMounted(() => {
     ProductService.getProductsSmall().then((data) => (products.value = data));
@@ -132,11 +149,13 @@ watch([getPrimary, getSurface, isDarkTheme], () => {
                     <Button icon="pi pi-print" class="mr-2" severity="secondary" text />
                     <Button icon="pi pi-upload" severity="secondary" text />
                     <Button icon="pi pi-upload" severity="secondary" text />
-                    <Button icon="pi pi-upload" severity="secondary" text />
+                    <Button icon="pi pi-ellipsis-v" severity="secondary" text />
                 </template>
             </Toolbar>
+
             <div class="font-semibold text-xl" style="border-bottom: 1px solid var(--surface-border)">Разделы</div>
-            <div class="flex flex-col md:flex-row gap-4">
+
+            <!-- <div class="flex flex-col md:flex-row gap-4">
                 <InputGroup>
                     <div class="layout-menu ul a">
                         <span>Раздел №1</span>
@@ -154,10 +173,17 @@ watch([getPrimary, getSurface, isDarkTheme], () => {
                 <InputGroup>
                     <span>Раздел №1</span>
                 </InputGroup>
+            </div> -->
+
+            <div class="sections-list">
+                <div v-for="section in sections" :key="section.id" class="section-item" @click="goToSection(section.link)">
+                    {{ section.name }}
+                    <i class="pi pi-fw pi-angle-right" />
+                </div>
             </div>
         </div>
 
-        <div class="font-semibold text-xl mb-4" style="border-bottom: 1px solid var(--surface-border)">Несортированные</div>
+        <div class="font-semibold text-xl mb-4" style="border-bottom: 1px solid var(--surface-border)">Папки</div>
         <TreeTable :value="treeTableValue" selectionMode="button" v-model:selectionKeys="selectedTreeTableValue">
             <Column field="name" header="Имя" :expander="true"></Column>
             <Column field="size" header="Дата"></Column>
@@ -165,3 +191,28 @@ watch([getPrimary, getSurface, isDarkTheme], () => {
         </TreeTable>
     </div>
 </template>
+
+<style scoped>
+.sections-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Две колонки */
+    gap: 1rem; /* Отступы между элементами */
+    padding: 1rem;
+    /* border: 1px solid #ddd;  */
+    border-radius: 8px;
+}
+
+.section-item {
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    /* border: 1px solid #ccc; */
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.section-item:hover {
+    background-color: #e6f7ff; /* Цвет при наведении */
+}
+</style>

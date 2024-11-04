@@ -11,12 +11,16 @@ const model = ref([
             { label: 'Отчеты', icon: 'pi pi-fw pi-home', to: '/pages/auth/login' },
             { label: 'Ученики', icon: 'pi pi-fw pi-home', to: '/uikit/filedoc' }
         ]
-    },
+    }
+]);
+
+const model1 = ref([
     {
         items: [
             {
                 label: 'Классы',
                 icon: 'pi pi-fw pi-bookmark',
+                showButton: true,
                 items: [
                     {
                         label: 'Класс А',
@@ -24,12 +28,16 @@ const model = ref([
                     },
                     {
                         label: 'Класс В',
-                        icon: 'pi pi-fw pi-bookmark'
+                        icon: 'pi pi-fw pi-bookmark',
+                        showButton: true
                     }
                 ]
             }
         ]
-    },
+    }
+]);
+
+const model2 = ref([
     {
         items: [
             {
@@ -42,126 +50,39 @@ const model = ref([
                     },
                     {
                         label: 'Раздел 2',
-                        icon: 'pi pi-fw pi-bookmark'
+                        icon: 'pi pi-fw pi-bookmark',
+                        showButton: true
                     }
                 ]
             }
         ]
     }
-    // {
-    //     label: 'Pages',
-    //     icon: 'pi pi-fw pi-briefcase',
-    //     to: '/pages',
-    //     items: [
-    //         {
-    //             label: 'Landing',
-    //             icon: 'pi pi-fw pi-globe',
-    //             to: '/landing'
-    //         },
-    //         {
-    //             label: 'Auth',
-    //             icon: 'pi pi-fw pi-user',
-    //             items: [
-    //                 {
-    //                     label: 'Login',
-    //                     icon: 'pi pi-fw pi-sign-in',
-    //                     to: '/auth/login'
-    //                 },
-    //                 {
-    //                     label: 'Error',
-    //                     icon: 'pi pi-fw pi-times-circle',
-    //                     to: '/auth/error'
-    //                 },
-    //                 {
-    //                     label: 'Access Denied',
-    //                     icon: 'pi pi-fw pi-lock',
-    //                     to: '/auth/access'
-    //                 }
-    //             ]
-    //         },
-    //         {
-    //             label: 'Crud',
-    //             icon: 'pi pi-fw pi-pencil',
-    //             to: '/pages/crud'
-    //         },
-    //         {
-    //             label: 'Not Found',
-    //             icon: 'pi pi-fw pi-exclamation-circle',
-    //             to: '/pages/notfound'
-    //         },
-    //         {
-    //             label: 'Empty',
-    //             icon: 'pi pi-fw pi-circle-off',
-    //             to: '/pages/empty'
-    //         }
-    //     ]
-    // }
-    // {
-    //     label: 'Hierarchy',
-    //     items: [
-    //         {
-    //             label: 'Submenu 1',
-    //             icon: 'pi pi-fw pi-bookmark',
-    //             items: [
-    //                 {
-    //                     label: 'Submenu 1.1',
-    //                     icon: 'pi pi-fw pi-bookmark',
-    //                     items: [
-    //                         { label: 'Submenu 1.1.1', icon: 'pi pi-fw pi-bookmark' },
-    //                         { label: 'Submenu 1.1.2', icon: 'pi pi-fw pi-bookmark' },
-    //                         { label: 'Submenu 1.1.3', icon: 'pi pi-fw pi-bookmark' }
-    //                     ]
-    //                 },
-    //                 {
-    //                     label: 'Submenu 1.2',
-    //                     icon: 'pi pi-fw pi-bookmark',
-    //                     items: [{ label: 'Submenu 1.2.1', icon: 'pi pi-fw pi-bookmark' }]
-    //                 }
-    //             ]
-    //         },
-    //         {
-    //             label: 'Submenu 2',
-    //             icon: 'pi pi-fw pi-bookmark',
-    //             items: [
-    //                 {
-    //                     label: 'Submenu 2.1',
-    //                     icon: 'pi pi-fw pi-bookmark',
-    //                     items: [
-    //                         { label: 'Submenu 2.1.1', icon: 'pi pi-fw pi-bookmark' },
-    //                         { label: 'Submenu 2.1.2', icon: 'pi pi-fw pi-bookmark' }
-    //                     ]
-    //                 },
-    //                 {
-    //                     label: 'Submenu 2.2',
-    //                     icon: 'pi pi-fw pi-bookmark',
-    //                     items: [{ label: 'Submenu 2.2.1', icon: 'pi pi-fw pi-bookmark' }]
-    //                 }
-    //             ]
-    //         }
-    //     ]
-    // }
-    // {
-    //     label: 'Get Started',
-    //     items: [
-    //         {
-    //             label: 'Documentation',
-    //             icon: 'pi pi-fw pi-book',
-    //             to: '/documentation'
-    //         },
-    //         {
-    //             label: 'View Source',
-    //             icon: 'pi pi-fw pi-github',
-    //             url: 'https://github.com/primefaces/sakai-vue',
-    //             target: '_blank'
-    //         }
-    //     ]
-    // }
 ]);
 </script>
 
 <template>
-    <ul class="layout-menu">
+    <ul class="layout-menu" style="background-color: var(--surface-overlay); border-radius: var(--content-border-radius); padding: 0.5rem; margin: 1rem 0">
         <template v-for="(item, i) in model" :key="item">
+            <app-menu-item v-if="!item.separator" :item="item" :index="i"></app-menu-item>
+            <li v-if="item.separator" class="menu-separator"></li>
+        </template>
+    </ul>
+    <ul
+        class="layout-menu"
+        style="background-color: var(--surface-overlay); border-radius: var(--content-border-radius); padding: 0.5rem; margin: 1rem 0; display: flex; align-items: flex-start; flex-direction: row-reverse; justify-content: space-between"
+    >
+        <Button icon="pi pi-plus" class="mr-2" severity="secondary" text />
+        <template v-for="(item, i) in model1" :key="item">
+            <app-menu-item v-if="!item.separator" :item="item" :index="i"></app-menu-item>
+            <li v-if="item.separator" class="menu-separator"></li>
+        </template>
+    </ul>
+    <ul
+        class="layout-menu"
+        style="background-color: var(--surface-overlay); border-radius: var(--content-border-radius); padding: 0.5rem; margin: 1rem 0; display: flex; align-items: flex-start; flex-direction: row-reverse; justify-content: space-between"
+    >
+        <Button icon="pi pi-plus" class="mr-2" severity="secondary" text />
+        <template v-for="(item, i) in model2" :key="item">
             <app-menu-item v-if="!item.separator" :item="item" :index="i"></app-menu-item>
             <li v-if="item.separator" class="menu-separator"></li>
         </template>

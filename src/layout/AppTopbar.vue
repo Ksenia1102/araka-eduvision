@@ -1,8 +1,15 @@
 <script setup>
 import { useLayout } from '@/layout/composables/layout';
+import { ref } from 'vue';
 import AppConfigurator from './AppConfigurator.vue';
 
+// import ToggleSwitchButton from 'toggle-switch-button-vue';
+
+// Создаем переменную для состояния переключателя
+const isActive = ref(true);
+
 const { onMenuToggle } = useLayout();
+// const switchValue = ref(false);
 </script>
 
 <template>
@@ -11,8 +18,6 @@ const { onMenuToggle } = useLayout();
             <button class="layout-menu-button layout-topbar-action" @click="onMenuToggle">
                 <i class="pi pi-bars"></i>
             </button>
-            <!-- кнопка переключение -->
-            <!-- <ToggleSwitch v-model="switchValue" /> -->
 
             <!-- лого -->
             <router-link to="/" class="layout-topbar-logo">
@@ -20,6 +25,14 @@ const { onMenuToggle } = useLayout();
 
                 <span>EduVision</span>
             </router-link>
+            <!-- переключатель -->
+            <!-- <ToggleSwitch v-model="switchValue" /> -->
+
+            <!-- <div class="dashboard">
+                <div class="toggle-switch-section">
+                    <ToggleSwitch v-model="isActive" label="ON|OFF" />
+                </div>
+            </div> -->
         </div>
 
         <div class="layout-topbar-actions">
@@ -62,7 +75,7 @@ const { onMenuToggle } = useLayout();
                         <span>download</span>
                     </button>
                     <button type="button" class="layout-topbar-action">
-                        <i class="pi pi-fw pi-question-circle !text-2xl"></i>
+                        <i class="pi pi-android"></i>
                         <span>question</span>
                     </button>
                     <button type="button" class="layout-topbar-action">
@@ -74,3 +87,17 @@ const { onMenuToggle } = useLayout();
         </div>
     </div>
 </template>
+
+<style scoped>
+.toggle-switch-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 1.2em;
+    color: #333;
+}
+</style>
