@@ -72,6 +72,8 @@
 
     .layout-menu-button {
         margin-right: 0.5rem;
+        // скрытие кнопки
+        visibility: hidden;
     }
 
     .layout-topbar-menu-button {
@@ -104,6 +106,7 @@
         }
 
         .layout-menu-button {
+            visibility: visible;
             margin-left: 0;
             margin-right: 0.5rem;
         }

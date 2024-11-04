@@ -57,9 +57,8 @@ function isOutsideClicked(event) {
     <div class="layout-wrapper" :class="containerClass">
         <app-topbar></app-topbar>
         <!--верхнее меню-->
-        <app-sidebar></app-sidebar>
-        <!--боковое меню-->
         <div class="layout-main-container">
+            <app-sidebar></app-sidebar>
             <div class="layout-main">
                 <router-view></router-view>
             </div>

@@ -6,7 +6,6 @@ import AppMenuItem from './AppMenuItem.vue';
 
 const model = ref([
     {
-        label: 'Меню',
         items: [
             { label: 'Библиотека', icon: 'pi pi-fw pi-home', to: '/' },
             { label: 'Отчеты', icon: 'pi pi-fw pi-home', to: '/pages/auth/login' },
@@ -14,12 +13,40 @@ const model = ref([
         ]
     },
     {
-        label: 'Разделы',
-        items: [{ label: 'Раздел № 1', to: '/uikit/formlayout' }]
+        items: [
+            {
+                label: 'Классы',
+                icon: 'pi pi-fw pi-bookmark',
+                items: [
+                    {
+                        label: 'Класс А',
+                        icon: 'pi pi-fw pi-bookmark'
+                    },
+                    {
+                        label: 'Класс В',
+                        icon: 'pi pi-fw pi-bookmark'
+                    }
+                ]
+            }
+        ]
     },
     {
-        label: 'Классы',
-        items: [{ label: 'Класс А', icon: 'pi pi-fw pi-home', to: '/uikit/formlayout' }]
+        items: [
+            {
+                label: 'Разделы',
+                icon: 'pi pi-fw pi-bookmark',
+                items: [
+                    {
+                        label: 'Раздел 1',
+                        icon: 'pi pi-fw pi-bookmark'
+                    },
+                    {
+                        label: 'Раздел 2',
+                        icon: 'pi pi-fw pi-bookmark'
+                    }
+                ]
+            }
+        ]
     }
     // {
     //     label: 'Pages',

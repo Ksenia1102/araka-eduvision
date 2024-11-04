@@ -3,11 +3,8 @@ import AppMenu from './AppMenu.vue';
 </script>
 
 <template>
-    <!-- тут два меню-->
     <div class="layout-sidebar">
-        <app-menu></app-menu>
-    </div>
-    <div class="layout-sidebar">
+        <Button label="Создать" icon="pi pi-plus" class="mr-2 mb-2" style="width: 100%"></Button>
         <app-menu></app-menu>
     </div>
 </template>
